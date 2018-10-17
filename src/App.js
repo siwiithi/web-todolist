@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import TodoListContainer from './list/todoListContainer'
-import 
+import React, { Component } from 'react'
+import User from './User'
+import { connect } from 'react-redux'
 
-const store = createStore(rootReducer)
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <TodoListContainer />
-      </Provider>
+       <User username={this.props.user.name}/>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    // state ที่อยู่ใน userReducer
+    user: state.user,
+    emp: state.emp
+  };
+}
+export default connect(mapStateToProps)(App);
