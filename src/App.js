@@ -5,7 +5,10 @@ import { connect } from 'react-redux'
 class App extends Component {
   render() {
     return (
-       <User username={this.props.user.name}/>
+      <div>
+        <User username={this.props.user.name}/>
+        <button onClick={()=>this.props.setName('Sehun')}>Change Name</button>
+        </div>
     );
   }
 }
@@ -17,4 +20,15 @@ const mapStateToProps = (state) => {
     emp: state.emp
   };
 }
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setName:(name)=>{
+      dispatch({
+        type: "setName",
+        payload: name
+      })
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);
